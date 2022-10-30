@@ -40,6 +40,21 @@ export default function Home({ notes }: Notes) {
     router.replace(router.asPath); // refresh page
   };
 
+  const deleteNote = async (id: string) => {
+    try {
+      fetch(`http://localhost:3000/api/note/${id}`, {
+        headers: {
+          "content-Type": "application/json",
+        },
+        method: "DELETE",
+      }).then(() => {
+        refreshData();
+      });
+    } catch (error) {
+      console.log("Error:", error);
+    }
+  };
+
   const handleSubmit = async (data: FormData) => {
     try {
       createNote(data);
@@ -90,6 +105,12 @@ export default function Home({ notes }: Notes) {
                   <h3 className="font-bold">{note.title}</h3>
                   <p className="text-sm">{note.content}</p>
                 </div>
+                <button
+                  onClick={() => deleteNote(note.id)}
+                  className="bg-red-500 px-3 text-white rounded p-1"
+                >
+                  X
+                </button>
               </div>
             </li>
           ))}
