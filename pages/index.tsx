@@ -111,6 +111,18 @@ export default function Home({ notes }: Notes) {
                 >
                   X
                 </button>
+                <button
+                  onClick={() =>
+                    setForm({
+                      title: note.title,
+                      content: note.content,
+                      id: note.id,
+                    })
+                  }
+                  className="bg-blue-500 px-3 text-white rounded p-1"
+                >
+                  Update
+                </button>
               </div>
             </li>
           ))}
